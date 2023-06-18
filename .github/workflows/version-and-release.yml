@@ -71,3 +71,16 @@ jobs:
             } catch (error) {
               core.setFailed(error.message);
             }
+      - name: Build with dotnet
+        run: dotnet build Ask.Anything.Blazor.Server/Ask.Anything.Blazor.Server.csproj --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish Ask.Anything.Blazor.Server/Ask.Anything.Blazor.Server.csproj -c Release -o ./ask-anything
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'victorcomposes'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E5AB4817CC974428B197F44EDEE653FA }}
+          package: ./ask-anything
