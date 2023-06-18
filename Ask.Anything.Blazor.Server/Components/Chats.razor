@@ -1,0 +1,212 @@
+﻿@using Ask.Anything.Blazor.Server.Models
+@using MudBlazor
+@using Ask.Anything.Blazor.Server.Extensions
+@using Ask.Anything.Blazor.Server.Services
+@using Blazored.SessionStorage
+
+<style>
+    .stick {
+        position: sticky;
+        bottom: 0;
+    }
+
+    textarea {
+        resize: vertical !important;
+    }
+</style>
+
+<MudPaper Class="pa-4 mt-2">
+    
+    <MudStack Row="true" Justify="Justify.FlexStart" AlignItems="AlignItems.Stretch">
+        <MudButton Variant="Variant.Outlined" Color="Color.Secondary" FullWidth="true" Class="mb-2" OnClick="ClearChat">New Chat</MudButton>
+    </MudStack>
+
+    <MudStack Style="" AlignItems="AlignItems.Stretch">
+        <MudElement>
+            @foreach (var message in conversations)
+            {
+                @if (message.Sender == Sender.USER)
+                {
+                    <MudPaper Width="100%" Class="pa-4" Style="overflow-wrap: break-word">
+                        <MudStack Row="true">
+                            <MudAvatar Size="Size.Small" Square="true" Color="Color.Primary">VI</MudAvatar>
+                            <MudStack Justify="Justify.Center" Spacing="0">
+                                <MudText Style="white-space: pre-line;overflow-wrap: anywhere;" Typo="Typo.subtitle1">@message.Text</MudText>
+                            </MudStack>
+                        </MudStack>
+                    </MudPaper>
+                }
+
+                if (message.Sender == Sender.AI)
+                {
+                    <MudPaper Width="100%" Class="pa-4" Style="overflow-wrap: break-word">
+                        <MudStack Row="true">
+                            <MudAvatar Size="Size.Small" Square="true" Color="Color.Tertiary">AI</MudAvatar>
+                            <MudStack Justify="Justify.Center" Spacing="0">
+                                @* @((MarkupString)message.Text) *@
+                                <MudMarkdown OverrideHeaderTypo="HandleHeaderTypo" Value="@message.Text"/>
+                                @* <MudText Style="white-space: pre-line;overflow-wrap: anywhere;" Typo="Typo.subtitle1">@message.Text</MudText> *@
+                            </MudStack>
+                        </MudStack>
+                    </MudPaper>
+                }
+
+            }
+        </MudElement>
+    </MudStack>
+    <div>
+        <MudStack>
+            <MudTextField FullWidth="true" DisableUnderLine="true" Lines="3" @bind-Value="messageFromUser" Variant="Variant.Filled" Clearable="true" Immediate="true" Disabled="IsAiResponseLoading" AutoFocus="true" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" OnAdornmentClick="async () => await SendMessage()"/>
+        </MudStack>
+    </div>
+    
+    <MudPaper MaxWidth="100%" Elevation="25">
+        <MudToolBar>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Class="mb-2" OnClick="async () => await 
+            SendMessage()" ButtonType="ButtonType.Button" Disabled="IsAiResponseLoading">Send</MudButton>
+            <MudSpacer />
+            <MudChip Variant="Variant.Outlined" Color="Color.Secondary">total tokens: @totalTokens.ToString()</MudChip>
+        </MudToolBar>
+        <a id="bottom"></a>
+    </MudPaper>
+</MudPaper>
+
+@code {
+
+    [Inject] ISessionStorageService  SessionStorage { get; set; }
+    [Inject] ISnackbar Snackbar { get; set; }
+    [Inject] IAskAnythingService AskAnythingService { get; set; }
+    [Inject] public IJSRuntime JsRuntime { get; set; } = null!;
+    
+    [Parameter]
+    public ChatType Chat { get; set; }
+    
+    string messageFromUser;
+    int totalTokens = 0;
+    bool IsAiResponseLoading = false;
+
+    List<Message> conversations = new List<Message>();
+
+    private static Typo HandleHeaderTypo(Typo originalTypo) =>
+        originalTypo switch
+        {
+            Typo.h1 => Typo.h4,
+            Typo.h2 => Typo.h5,
+            Typo.h3 or Typo.h4 => Typo.h6,
+            _ => originalTypo
+        };
+    
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrEmpty(Chat.SystemPrompt.GetId()))
+        {
+            throw new Exception("");
+        }
+    }
+    
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await AddSystemPromptToConversations();
+    }
+
+    public async Task AddSystemPromptToConversations()
+    {
+        if (!conversations.Any())
+        {
+            conversations = await SessionStorage.GetItemAsync<List<Message>>($"conversations-{Chat.SystemPrompt.GetId()}") ??
+                            new List<Message>();
+        }
+
+        if (!conversations.Any(c => c.Sender == Sender.SYSTEM))
+        {
+            var prompt = Prompt.Create(Chat.SystemPrompt, Chat.SystemPrompt.GetPromptIcon());
+            conversations.Add(new Message(prompt.Type.GetPromptMessage(), Sender.SYSTEM));
+        }
+    }
+
+    private void ShowError(string responseError)
+    {
+        Snackbar.Add(responseError, Severity.Error);
+    }
+
+    private async Task ClearChat()
+    {
+        conversations.RemoveAll(t => t.Sender == Sender.AI || t.Sender == Sender.USER);
+        await SessionStorage.RemoveItemAsync($"conversations-{Chat.SystemPrompt.GetId()}");
+        await AddSystemPromptToConversations();
+        totalTokens = 0;
+        
+        StateHasChanged();
+        await Task.CompletedTask;
+    }
+
+    private async Task SendMessage()
+    {
+        if (string.IsNullOrEmpty(messageFromUser))
+        {
+            return;
+        }
+
+        try
+        {
+            await CreateChat();
+        }
+        catch (Exception e)
+        {
+            conversations.Remove(conversations.Last());
+            ShowError(e.Message);
+            StateHasChanged();
+        }
+    }
+
+    private async Task CreateChat()
+    {
+        IsAiResponseLoading = true;
+        try
+        {
+            
+            conversations.Add(new Message(messageFromUser, Sender.USER));
+            conversations.Add(new Message(string.Empty, Sender.AI));
+
+            var completionResult = AskAnythingService.CreateChatCompletionAsync(
+                new ChatRequest() 
+                {
+                    Messages = conversations, 
+                    PromptType = Chat.SystemPrompt
+                
+                },
+                CancellationToken.None);
+            
+            await foreach (var completion in completionResult)
+            {
+                if (completion.Successful)
+                {
+                    conversations.Last().Text += completion.Choices.First().Message.Content;
+                    await InvokeAsync(StateHasChanged);
+                    
+                    await JsRuntime.InvokeVoidAsync("scrollToTarget", "bottom");
+
+                    await SessionStorage.SetItemAsync($"conversations-{Chat.SystemPrompt.GetId()}", conversations);
+                    messageFromUser = "";
+                }
+                else
+                {
+                    conversations.Remove(conversations.Last());
+                    IsAiResponseLoading = false;
+                    if (completion.Error == null)
+                    {
+                        throw new Exception("An unknown error occured");
+                    }
+                    throw new Exception($"{completion.Error.Code}: {completion.Error.Message}");
+                }
+            }
+            IsAiResponseLoading = false;
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+
+}

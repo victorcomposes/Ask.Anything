@@ -1,3 +1,137 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor
+@inherits LayoutComponentBase
 
-<main> @Body </main>
+
+<MudThemeProvider Theme="@MyTheme.CurrentTheme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Href="/" Icon="@Icons.Material.Filled.Home" Color="Color.Inherit" Edge="Edge.Start"/>
+        @* <MudIconButton Href="/chat" Icon="@Icons.Material.Outlined.Chat" Color="Color.Inherit" Edge="Edge.Start"/> *@
+        @* <MudIconButton Href="/chats" Icon="@Icons.Material.Outlined.Apps" Color="Color.Inherit" Edge="Edge.Start"/> *@
+        <MudSpacer/>
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    Themes MyTheme = new Themes();
+
+    public class Themes
+    {
+        public bool IsDarkTheme { get; set; } = true;
+        public MudTheme CurrentTheme;
+
+        public Themes()
+        {
+            CurrentTheme = GenerateDarkTheme();
+        }
+
+        public void ToggleDarkTheme()
+        {
+            IsDarkTheme = !IsDarkTheme;
+
+            CurrentTheme = IsDarkTheme
+                ? GenerateDarkTheme()
+                : GenerateLightTheme();
+        }
+
+        private MudTheme GenerateDarkTheme()
+        {
+            var darkTheme = new MudTheme
+            {
+                Palette = new Palette
+                {
+                    Black = "#424242",
+                    White = "#FFFFFF",
+                    Primary = "#03A9F4",
+                    PrimaryContrastText = "#FFFFFF",
+                    Secondary = "#FFC107",
+                    SecondaryContrastText = "#212121",
+                    Tertiary = "#9C27B0",
+                    TertiaryContrastText = "#FFFFFF",
+                    Info = "#2196F3",
+                    InfoContrastText = "#FFFFFF",
+                    Success = "#4CAF50",
+                    SuccessContrastText = "#FFFFFF",
+                    Warning = "#FF9800",
+                    WarningContrastText = "#212121",
+                    Error = "#F44336",
+                    ErrorContrastText = "#FFFFFF",
+                    Dark = "#212121",
+                    DarkContrastText = "#FFFFFF",
+                    TextPrimary = "#FFFFFF",
+                    TextSecondary = "#BDBDBD",
+                    TextDisabled = "#757575",
+                    ActionDefault = "#FFFFFF",
+                    ActionDisabled = "#BDBDBD",
+                    ActionDisabledBackground = "#E0E0E0",
+                    Background = "#303030",
+                    BackgroundGrey = "#424242",
+                    Surface = "#212121",
+                    DrawerBackground = "#424242",
+                    DrawerText = "#FFFFFF",
+                    DrawerIcon = "#FFFFFF",
+                    AppbarBackground = "#212121",
+                    AppbarText = "#FFFFFF",
+                    LinesDefault = "#BDBDBD",
+                    LinesInputs = "#E0E0E0",
+                    TableLines = "#BDBDBD",
+                    TableStriped = "#424242",
+                    TableHover = "#616161",
+                    Divider = "#BDBDBD",
+                    DividerLight = "#E0E0E0",
+                    PrimaryDarken = "#0288D1",
+                    PrimaryLighten = "#B3E5FC",
+                    SecondaryDarken = "#FFA000",
+                    SecondaryLighten = "#FFE082",
+                    TertiaryDarken = "#7B1FA2",
+                    TertiaryLighten = "#E1BEE7",
+                    InfoDarken = "#1976D2",
+                    InfoLighten = "#90CAF9",
+                    SuccessDarken = "#388E3C",
+                    SuccessLighten = "#A5D6A7",
+                    WarningDarken = "#EF6C00",
+                    WarningLighten = "#FFCC80",
+                    ErrorDarken = "#C62828",
+                    ErrorLighten = "#EF9A9A",
+                    DarkDarken = "#000000",
+                    DarkLighten = "#484848",
+                    HoverOpacity = 0.1,
+                    GrayDefault = "#9E9E9E",
+                    GrayLight = "#F5F5F5",
+                    GrayLighter = "#FAFAFA",
+                    GrayDark = "#616161",
+                    GrayDarker = "#424242",
+                    OverlayDark = "rgba(0, 0, 0, 0.5)",
+                    OverlayLight = "rgba(255, 255, 255, 0.5)"
+                }
+            };
+            return
+                darkTheme;
+        }
+
+        private MudTheme GenerateLightTheme()
+        {
+            var lightTheme = new MudTheme
+            {
+                Palette = new Palette()
+                {
+                    Primary = "#DC4405",
+                    Secondary = "#000088",
+                    Surface = "#373740",
+                    TextPrimary = "#000000",
+                    TextSecondary = "rgba(255,255,255, 0.50)"
+                }
+            };
+            return lightTheme;
+        }
+    }
+
+}

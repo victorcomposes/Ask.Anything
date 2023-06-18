@@ -1,0 +1,67 @@
+﻿@using MudBlazor
+@using Ask.Anything.Blazor.Server.Models
+@using Ask.Anything.Blazor.Server.Models.Enums
+@using Ask.Anything.Blazor.Server.Extensions
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudTabs Centered="false"
+             PrevIcon="@Icons.Material.Outlined.SkipPrevious"
+             NextIcon="@Icons.Material.Outlined.SkipNext"
+             Outlined="true"
+             Rounded="true"
+             Position="Position.Top"
+             Color="Color.Dark"
+             MinimumTabWidth="40px"
+             KeepPanelsAlive="true"
+             AlwaysShowScrollButtons="true"
+             Class="mt-2 mb-2">
+        <MudTabPanel ToolTip="@Assistant.SystemPrompt.GetPromptDescription()" Icon="@Assistant.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="Assistant"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@DanGpt.SystemPrompt.GetPromptDescription()" Icon="@DanGpt.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="DanGpt"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@CodeReviewer.SystemPrompt.GetPromptDescription()" Icon="@CodeReviewer.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="CodeReviewer"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@WealthManager.SystemPrompt.GetPromptDescription()" Icon="@WealthManager.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="WealthManager"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@SocraticPhilosopher.SystemPrompt.GetPromptDescription()" Icon="@SocraticPhilosopher.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="SocraticPhilosopher"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@Stoic.SystemPrompt.GetPromptDescription()" Icon="@Stoic.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="Stoic"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@AdvancedRephraser.SystemPrompt.GetPromptDescription()" Icon="@AdvancedRephraser.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="AdvancedRephraser"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@Researcher.SystemPrompt.GetPromptDescription()" Icon="@Researcher.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="Researcher"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@Etymologist.SystemPrompt.GetPromptDescription()" Icon="@Etymologist.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="Etymologist"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@MindMap.SystemPrompt.GetPromptDescription()" Icon="@MindMap.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="MindMap"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@LanguageLiteraryCritic.SystemPrompt.GetPromptDescription()" Icon="@LanguageLiteraryCritic.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="LanguageLiteraryCritic"></Chats>
+        </MudTabPanel>
+    </MudTabs>
+</MudContainer>
+
+
+@code {
+    public ChatType Assistant => new ChatType(systemPrompt: PromptType.Assistant);
+    public ChatType CodeReviewer => new ChatType(systemPrompt: PromptType.CodeReviewer);
+    public ChatType WealthManager => new ChatType(systemPrompt: PromptType.WealthManager);
+    public ChatType SocraticPhilosopher => new ChatType(systemPrompt: PromptType.SocraticPhilosopher);
+    public ChatType Stoic => new ChatType(systemPrompt: PromptType.Stoic);
+    public ChatType AdvancedRephraser => new ChatType(systemPrompt: PromptType.AdvancedRephraser);
+    public ChatType Researcher => new ChatType(systemPrompt: PromptType.Researcher);
+    public ChatType Etymologist => new ChatType(systemPrompt: PromptType.Etymologist);
+    public ChatType MindMap => new ChatType(systemPrompt: PromptType.MindMap);
+    public ChatType LanguageLiteraryCritic => new ChatType(systemPrompt: PromptType.LanguageLiteraryCritic);
+    public ChatType DanGpt => new ChatType(systemPrompt: PromptType.DanGpt);
+}
