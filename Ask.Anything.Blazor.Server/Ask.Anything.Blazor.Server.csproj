@@ -1,9 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-    <PropertyGroup>
-        <Version>1.2.0</Version>
-        <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
-
+  <PropertyGroup>
+    <Version>1.2.0</Version>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0c46114b-c3fb-45fc-b4ef-b227c4fd8ce5</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Betalgo.OpenAI" Version="7.0.0" />
+    <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
+    <PackageReference Include="MudBlazor" Version="6.4.1" />
+    <PackageReference Include="MudBlazor.Markdown" Version="0.1.1" />
+  </ItemGroup>
+  <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
+    <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
+    <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory=".." />
+  </Target>
 </Project>

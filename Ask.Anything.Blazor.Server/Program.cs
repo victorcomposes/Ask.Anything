@@ -1,9 +1,22 @@
+using Ask.Anything.Blazor.Server.Services;
+using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using MudBlazor;
+using MudBlazor.Services;
+using OpenAI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddMudServices();
+builder.Services.AddMudMarkdownServices();
+builder.Services.AddBlazoredSessionStorage();
+
+builder.Services.AddOpenAIService();
+
+builder.Services.AddSingleton<IAskAnythingService, AskAnythingService>();
 
 var app = builder.Build();
 
