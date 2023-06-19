@@ -150,6 +150,7 @@
 
         try
         {
+            IsAiResponseLoading = true;
             await CreateChat();
         }
         catch (Exception e)
@@ -162,7 +163,6 @@
 
     private async Task CreateChat()
     {
-        IsAiResponseLoading = true;
         try
         {
             
