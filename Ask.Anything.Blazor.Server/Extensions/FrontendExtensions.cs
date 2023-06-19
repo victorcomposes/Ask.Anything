@@ -31,11 +31,13 @@ public static class FrontendExtensions
             PromptType.Essay => Icons.Material.Filled.Article,
             PromptType.CodeReviewer => Icons.Material.Filled.Code,
             PromptType.WealthManager => Icons.Material.Filled.AttachMoney,
-            PromptType.SocraticPhilosopher => Icons.Material.Filled.Person2,
+            PromptType.SocraticPhilosopher => Icons.Material.Filled.Elderly,
             PromptType.Assistant => Icons.Material.Filled.Public,
             PromptType.Etymologist => Icons.Material.Filled.Password,
             PromptType.LanguageLiteraryCritic => Icons.Material.Filled.Topic,
             PromptType.DanGpt => Icons.Material.Filled.Psychology,
+            PromptType.AppliedExpertSystem => Icons.Material.Filled.CrueltyFree,
+            PromptType.ContinuousProblemSolvingSystem => Icons.Material.Filled.SyncProblem,
             _ => throw new ArgumentException($"Invalid prompt type: {promptType}")
         };
     }

@@ -18,6 +18,15 @@
         <MudTabPanel ToolTip="@Assistant.SystemPrompt.GetPromptDescription()" Icon="@Assistant.SystemPrompt.GetPromptIcon()">
             <Chats Chat="Assistant"></Chats>
         </MudTabPanel>
+        <MudTabPanel ToolTip="@AppliedExpertSystem.SystemPrompt.GetPromptDescription()" Icon="@AppliedExpertSystem.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="AppliedExpertSystem"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@ContinuousProblemSolvingSystem.SystemPrompt.GetPromptDescription()" Icon="@ContinuousProblemSolvingSystem.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="ContinuousProblemSolvingSystem"></Chats>
+        </MudTabPanel>
+        <MudTabPanel ToolTip="@SocraticPhilosopher.SystemPrompt.GetPromptDescription()" Icon="@SocraticPhilosopher.SystemPrompt.GetPromptIcon()">
+            <Chats Chat="SocraticPhilosopher"></Chats>
+        </MudTabPanel>
         <MudTabPanel ToolTip="@DanGpt.SystemPrompt.GetPromptDescription()" Icon="@DanGpt.SystemPrompt.GetPromptIcon()">
             <Chats Chat="DanGpt"></Chats>
         </MudTabPanel>
@@ -26,9 +35,6 @@
         </MudTabPanel>
         <MudTabPanel ToolTip="@WealthManager.SystemPrompt.GetPromptDescription()" Icon="@WealthManager.SystemPrompt.GetPromptIcon()">
             <Chats Chat="WealthManager"></Chats>
-        </MudTabPanel>
-        <MudTabPanel ToolTip="@SocraticPhilosopher.SystemPrompt.GetPromptDescription()" Icon="@SocraticPhilosopher.SystemPrompt.GetPromptIcon()">
-            <Chats Chat="SocraticPhilosopher"></Chats>
         </MudTabPanel>
         <MudTabPanel ToolTip="@Stoic.SystemPrompt.GetPromptDescription()" Icon="@Stoic.SystemPrompt.GetPromptIcon()">
             <Chats Chat="Stoic"></Chats>
@@ -64,4 +70,6 @@
     public ChatType MindMap => new ChatType(systemPrompt: PromptType.MindMap);
     public ChatType LanguageLiteraryCritic => new ChatType(systemPrompt: PromptType.LanguageLiteraryCritic);
     public ChatType DanGpt => new ChatType(systemPrompt: PromptType.DanGpt);
+    public ChatType AppliedExpertSystem => new ChatType(systemPrompt: PromptType.AppliedExpertSystem);
+    public ChatType ContinuousProblemSolvingSystem => new ChatType(systemPrompt: PromptType.ContinuousProblemSolvingSystem);
 }
