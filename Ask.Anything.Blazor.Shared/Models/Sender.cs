@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Ask.Anything.Blazor.Server.Models;
+namespace Ask.Anything.Blazor.Shared.Models;
 
 public enum Sender
 {

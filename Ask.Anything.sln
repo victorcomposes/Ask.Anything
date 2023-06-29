@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ask.Anything.Blazor.Server", "Ask.Anything.Blazor.Server\Ask.Anything.Blazor.Server.csproj", "{340C036C-4BDE-41C1-A814-C6A139A7CE57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ask.Anything.Blazor.Component", "Ask.Anything.Blazor.Component\Ask.Anything.Blazor.Component.csproj", "{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ask.Anything.Blazor.Shared", "Ask.Anything.Blazor.Shared\Ask.Anything.Blazor.Shared.csproj", "{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{340C036C-4BDE-41C1-A814-C6A139A7CE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{340C036C-4BDE-41C1-A814-C6A139A7CE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{340C036C-4BDE-41C1-A814-C6A139A7CE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

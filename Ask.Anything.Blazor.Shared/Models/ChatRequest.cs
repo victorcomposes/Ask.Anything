@@ -1,6 +1,6 @@
-﻿using Ask.Anything.Blazor.Server.Models.Enums;
+﻿using Ask.Anything.Blazor.Shared.Models.Enums;
 
-namespace Ask.Anything.Blazor.Server.Models;
+namespace Ask.Anything.Blazor.Shared.Models;
 
 public class ChatRequest
 {

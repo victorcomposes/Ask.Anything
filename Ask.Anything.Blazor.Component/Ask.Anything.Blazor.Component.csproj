@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.7" />
+        <PackageReference Include="Betalgo.OpenAI" Version="7.0.0" />
+        <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
+        <PackageReference Include="MudBlazor.Markdown" Version="0.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ask.Anything.Blazor.Shared\Ask.Anything.Blazor.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

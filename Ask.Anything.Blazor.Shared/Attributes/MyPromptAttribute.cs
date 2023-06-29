@@ -1,4 +1,4 @@
-﻿namespace Ask.Anything.Blazor.Server.Attributes;
+﻿namespace Ask.Anything.Blazor.Shared.Attributes;
 
 public class MyPromptAttribute : Attribute
 {

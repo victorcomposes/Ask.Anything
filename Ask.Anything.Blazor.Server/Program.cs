@@ -1,7 +1,5 @@
-using Ask.Anything.Blazor.Server.Services;
+using Ask.Anything.Blazor.Component.Services;
 using Blazored.SessionStorage;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudBlazor.Services;
 using OpenAI.Extensions;

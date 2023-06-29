@@ -1,8 +1,9 @@
-﻿@using Ask.Anything.Blazor.Server.Models
+﻿@using Ask.Anything.Blazor.Component.Services
+@using Ask.Anything.Blazor.Shared.Extensions
+@using Ask.Anything.Blazor.Shared.Models
 @using MudBlazor
-@using Ask.Anything.Blazor.Server.Extensions
-@using Ask.Anything.Blazor.Server.Services
 @using Blazored.SessionStorage
+@using Microsoft.JSInterop
 
 <style>
     .stick {
@@ -143,6 +144,8 @@
 
     private async Task SendMessage()
     {
+        IsAiResponseLoading = true;
+        StateHasChanged();
         if (string.IsNullOrEmpty(messageFromUser))
         {
             return;
@@ -150,7 +153,6 @@
 
         try
         {
-            IsAiResponseLoading = true;
             await CreateChat();
         }
         catch (Exception e)
@@ -159,13 +161,13 @@
             ShowError(e.Message);
             StateHasChanged();
         }
+        IsAiResponseLoading = false;
     }
 
     private async Task CreateChat()
     {
         try
         {
-            
             conversations.Add(new Message(messageFromUser, Sender.USER));
             conversations.Add(new Message(string.Empty, Sender.AI));
 
@@ -183,7 +185,7 @@
                 if (completion.Successful)
                 {
                     conversations.Last().Text += completion.Choices.First().Message.Content;
-                    await InvokeAsync(StateHasChanged);
+                    StateHasChanged();
                     
                     await JsRuntime.InvokeVoidAsync("scrollToTarget", "bottom");
 
@@ -201,7 +203,6 @@
                     throw new Exception($"{completion.Error.Code}: {completion.Error.Message}");
                 }
             }
-            IsAiResponseLoading = false;
         }
         catch (Exception e)
         {
