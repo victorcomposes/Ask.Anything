@@ -8,10 +8,8 @@
     <UserSecretsId>0c46114b-c3fb-45fc-b4ef-b227c4fd8ce5</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Betalgo.OpenAI" Version="7.0.0" />
-    <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
-    <PackageReference Include="MudBlazor" Version="6.4.1" />
-    <PackageReference Include="MudBlazor.Markdown" Version="0.1.1" />
+    <ProjectReference Include="..\Ask.Anything.Blazor.Component\Ask.Anything.Blazor.Component.csproj" />
+    <ProjectReference Include="..\Ask.Anything.Blazor.Shared\Ask.Anything.Blazor.Shared.csproj" />
   </ItemGroup>
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />

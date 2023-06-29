@@ -1,6 +1,6 @@
-﻿using Ask.Anything.Blazor.Server.Attributes;
+﻿using Ask.Anything.Blazor.Shared.Attributes;
 
-namespace Ask.Anything.Blazor.Server.Models.Enums;
+namespace Ask.Anything.Blazor.Shared.Models.Enums;
 
 public enum PromptType
 {

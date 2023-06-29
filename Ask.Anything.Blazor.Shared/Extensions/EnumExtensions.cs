@@ -1,7 +1,7 @@
-﻿using Ask.Anything.Blazor.Server.Attributes;
-using Ask.Anything.Blazor.Server.Models;
+﻿using Ask.Anything.Blazor.Shared.Attributes;
+using Ask.Anything.Blazor.Shared.Models;
 
-namespace Ask.Anything.Blazor.Server.Extensions;
+namespace Ask.Anything.Blazor.Shared.Extensions;
 
 public static class EnumExtensions
 {

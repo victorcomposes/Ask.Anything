@@ -1,10 +1,10 @@
-﻿using Ask.Anything.Blazor.Server.Extensions;
-using Ask.Anything.Blazor.Server.Models;
+﻿using Ask.Anything.Blazor.Shared.Extensions;
+using Ask.Anything.Blazor.Shared.Models;
 using OpenAI.Interfaces;
 using OpenAI.ObjectModels.RequestModels;
 using OpenAI.ObjectModels.ResponseModels;
 
-namespace Ask.Anything.Blazor.Server.Services;
+namespace Ask.Anything.Blazor.Component.Services;
 
 public class AskAnythingService : IAskAnythingService
 {

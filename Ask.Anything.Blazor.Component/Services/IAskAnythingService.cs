@@ -1,7 +1,7 @@
-﻿using Ask.Anything.Blazor.Server.Models;
+﻿using Ask.Anything.Blazor.Shared.Models;
 using OpenAI.ObjectModels.ResponseModels;
 
-namespace Ask.Anything.Blazor.Server.Services;
+namespace Ask.Anything.Blazor.Component.Services;
 
 public interface IAskAnythingService
 {

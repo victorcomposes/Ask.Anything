@@ -1,6 +1,6 @@
-﻿using Ask.Anything.Blazor.Server.Models.Enums;
+﻿using Ask.Anything.Blazor.Shared.Models.Enums;
 
-namespace Ask.Anything.Blazor.Server.Extensions;
+namespace Ask.Anything.Blazor.Shared.Extensions;
 
 public static class PromptExtensions
 {
