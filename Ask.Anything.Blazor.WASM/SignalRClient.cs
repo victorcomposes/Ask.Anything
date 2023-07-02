@@ -29,7 +29,7 @@ public class SignalRClient
         _logger = logger;
         var hubeBaseUrl = hostEnvironment.IsDevelopment()
             ? "https://localhost:7074"
-            : "http://victorcomposes.azurewebsites.net";
+            : "https://victorcomposes.azurewebsites.net";
         var hubUrl = $"{hubeBaseUrl}/matrixhub";
         _connection = new HubConnectionBuilder().WithUrl(hubUrl).WithAutomaticReconnect().Build();
         RegisterHandlers();
