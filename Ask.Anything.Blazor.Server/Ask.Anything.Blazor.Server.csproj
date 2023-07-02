@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ask.Anything.Blazor.Component\Ask.Anything.Blazor.Component.csproj" />
-    <ProjectReference Include="..\Ask.Anything.Blazor.Shared\Ask.Anything.Blazor.Shared.csproj" />
+    <ProjectReference Include="..\Ask.Anything.Shared\Ask.Anything.Shared.csproj" />
   </ItemGroup>
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />

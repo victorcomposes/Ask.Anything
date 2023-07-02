@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ask.Anything.Blazor.Shared\Ask.Anything.Blazor.Shared.csproj" />
+      <ProjectReference Include="..\Ask.Anything.Shared\Ask.Anything.Shared.csproj" />
     </ItemGroup>
 
 </Project>

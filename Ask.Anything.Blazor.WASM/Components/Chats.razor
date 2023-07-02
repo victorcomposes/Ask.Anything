@@ -1,0 +1,50 @@
+﻿@using Ask.Anything.Blazor.WASM.Models
+@using MudBlazor
+@using Ask.Anything.Blazor.Shared.Models
+@using Ask.Anything.Blazor.Shared.Models.Enums
+@using Ask.Anything.Blazor.Shared.Extensions
+
+@inherits ChatsBase
+
+<div style="display: grid; grid-template-rows: 1fr auto; height: 100%; padding: 24px 0;">
+    <MudPaper Elevation="0" Style=@($"background: {(!isDarkMode ? Theme.Palette.BackgroundGrey : Theme.PaletteDark.BackgroundGrey)}; border: 1px solid #ffc107ff; overflow-y: auto; height: 100%")>
+        <MudContainer Class="pa-0" Style="height: 100%">
+            <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
+                <MudIconButton Icon="@PromptType.AppliedExpertSystem.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.AppliedExpertSystem)"></MudIconButton>
+                <MudIconButton Icon="@PromptType.AdvancedRephraser.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.AdvancedRephraser)"></MudIconButton>
+                <MudIconButton Icon="@PromptType.ContinuousProblemSolvingSystem.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.ContinuousProblemSolvingSystem)"></MudIconButton>
+                <MudIconButton Icon="@PromptType.SocraticPhilosopher.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.SocraticPhilosopher)"></MudIconButton>
+                <MudIconButton Icon="@PromptType.MindMap.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.MindMap)"></MudIconButton>
+                <MudIconButton Icon="@PromptType.Etymologist.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.Etymologist)"></MudIconButton>
+                <MudIconButton Icon="@PromptType.CodeReviewer.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.CodeReviewer)"></MudIconButton>
+                <MudButton StartIcon="@Icons.Material.Filled.Send" IconColor="Color.Warning" OnClick="() => ClearChat()">New Chat</MudButton>
+            </MudButtonGroup>
+            @if (StateData.CurrentMessageThread.Count == 0)
+            {
+            }
+            else
+            {
+                <MudList Class="py-0 chatContainer" DisableGutters="true">
+                    @foreach (var message in StateData.CurrentMessageThread.Where(s => s.Sender != Sender.SYSTEM))
+                    {
+                        <Chat MessageThreadItem="message"/>
+                    }
+                </MudList>
+            }
+        </MudContainer>
+    </MudPaper>
+    <MudStack Row="true" Class="mt-3">
+
+        <MudTextField @ref="multilineReference" @bind-Value="StateData.NewMessageString" Label="Ask Anything!" Lines="3" Style="height: 100%; border: 1px solid #ffc107ff;" id="message-input" Clearable="true" Disabled="StateData.IsAwaitingResponse" OnKeyDown="MessageTextFieldHandleEnterKey" Immediate="true" Variant="Variant.Outlined"></MudTextField>
+        <MudButton Disabled="StateData.IsAwaitingResponse" Color="Color.Secondary" Variant="Variant.Filled" OnClick="SendMessage">
+            @if (StateData.IsAwaitingResponse)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+            }
+            else
+            {
+                <MudIcon Icon="@Icons.Material.Filled.Send"></MudIcon>
+            }
+        </MudButton>
+    </MudStack>
+</div>
