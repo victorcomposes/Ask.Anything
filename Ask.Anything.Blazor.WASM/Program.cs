@@ -34,6 +34,6 @@ const string ApiClient = nameof(ApiClient);
 
 var apiBaseUrl = builder.HostEnvironment.IsDevelopment()
     ? "https://localhost:7293"
-    : "";
+    : "https://victorcomposes.azurewebsites.net";
 
 await builder.Build().RunAsync();
