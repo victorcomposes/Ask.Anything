@@ -72,10 +72,10 @@ jobs:
               core.setFailed(error.message);
             }
       - name: Build Ask.Anything.Api with dotnet
-        run: dotnet build Ask.Ask.Anything.Api/Ask.Anything.Api.csproj --configuration Release
+        run: dotnet build Ask.Anything.Api/Ask.Anything.Api.csproj --configuration Release
 
       - name: Publish Ask.Anything.Api
-        run: dotnet publish Ask.Ask.Anything.Api/Ask.Anything.Api.csproj -c Release -o ./ask-anything-api
+        run: dotnet publish Ask.Anything.Api/Ask.Anything.Api.csproj -c Release -o ./ask-anything-api
 
       - name: Deploy Ask.Anything.Api to Azure Web App
         id: deploy-to-webapp
