@@ -3,19 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ask.Anything.Blazor.Server", "Ask.Anything.Blazor.Server\Ask.Anything.Blazor.Server.csproj", "{340C036C-4BDE-41C1-A814-C6A139A7CE57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ask.Anything.Blazor.Server", "Ask.Anything.Blazor.Server\Ask.Anything.Blazor.Server.csproj", "{340C036C-4BDE-41C1-A814-C6A139A7CE57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ask.Anything.Blazor.Component", "Ask.Anything.Blazor.Component\Ask.Anything.Blazor.Component.csproj", "{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ask.Anything.Blazor.Component", "Ask.Anything.Blazor.Component\Ask.Anything.Blazor.Component.csproj", "{4D836923-C6D9-4BEA-9FA0-0ECD049717BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ask.Anything.Blazor.Shared", "Ask.Anything.Blazor.Shared\Ask.Anything.Blazor.Shared.csproj", "{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ask.Anything.Shared", "Ask.Anything.Shared\Ask.Anything.Shared.csproj", "{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ask.Anything.Api", "Ask.Anything.Api\Ask.Anything.Api.csproj", "{CA7EB50E-A9A4-43DE-BAD5-3484D840AB08}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ask.Anything.Blazor.WASM", "Ask.Anything.Blazor.WASM\Ask.Anything.Blazor.WASM.csproj", "{7E0EDBF1-23AF-41AB-9D91-CBBB61C6AD76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{340C036C-4BDE-41C1-A814-C6A139A7CE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +31,19 @@ Global
 		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B0B7D2C-7E79-4CCE-B04C-C8082D759837}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA7EB50E-A9A4-43DE-BAD5-3484D840AB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7EB50E-A9A4-43DE-BAD5-3484D840AB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7EB50E-A9A4-43DE-BAD5-3484D840AB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7EB50E-A9A4-43DE-BAD5-3484D840AB08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E0EDBF1-23AF-41AB-9D91-CBBB61C6AD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E0EDBF1-23AF-41AB-9D91-CBBB61C6AD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E0EDBF1-23AF-41AB-9D91-CBBB61C6AD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E0EDBF1-23AF-41AB-9D91-CBBB61C6AD76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20D48542-4575-4F71-8AE4-BFE1FFA67147}
 	EndGlobalSection
 EndGlobal
