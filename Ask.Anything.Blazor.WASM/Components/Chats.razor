@@ -45,15 +45,15 @@
             </MudButton>
         }
     </MudStack>
-
-    <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" Class="mt-2" Size="Size.Large">
-        <MudIconButton Icon="@PromptType.AppliedExpertSystem.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.AppliedExpertSystem)"></MudIconButton>
-        <MudIconButton Icon="@PromptType.AdvancedRephraser.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.AdvancedRephraser)"></MudIconButton>
-        <MudIconButton Icon="@PromptType.ContinuousProblemSolvingSystem.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.ContinuousProblemSolvingSystem)"></MudIconButton>
-        <MudIconButton Icon="@PromptType.SocraticPhilosopher.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.SocraticPhilosopher)"></MudIconButton>
-        <MudIconButton Icon="@PromptType.MindMap.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.MindMap)"></MudIconButton>
-        <MudIconButton Icon="@PromptType.Etymologist.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.Etymologist)"></MudIconButton>
-        <MudIconButton Icon="@PromptType.CodeReviewer.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.CodeReviewer)"></MudIconButton>
-        <MudButton StartIcon="@Icons.Material.Filled.Send" IconColor="Color.Warning" OnClick="() => ClearChat()">New Chat</MudButton>
-    </MudButtonGroup>
+    
+    <MudMenu Label="Open Menu" Variant="Variant.Filled" Color="Color.Secondary" Class="mt-2">
+        <MudMenuItem Icon="@PromptType.AppliedExpertSystem.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.AppliedExpertSystem)">@PromptType.AppliedExpertSystem.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@PromptType.AdvancedRephraser.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.AdvancedRephraser)">@PromptType.AdvancedRephraser.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@PromptType.ContinuousProblemSolvingSystem.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.ContinuousProblemSolvingSystem)">@PromptType.ContinuousProblemSolvingSystem.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@PromptType.SocraticPhilosopher.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.SocraticPhilosopher)">@PromptType.SocraticPhilosopher.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@PromptType.MindMap.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.MindMap)">@PromptType.MindMap.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@PromptType.Etymologist.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.Etymologist)">@PromptType.Etymologist.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@PromptType.CodeReviewer.GetPromptIcon()" OnClick="() => CustomPromptSelected(PromptType.CodeReviewer)">@PromptType.CodeReviewer.GetTitle()</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Send" IconColor="Color.Warning" OnClick="() => ClearChat()">New Chat</MudMenuItem>
+    </MudMenu>
 </div>
