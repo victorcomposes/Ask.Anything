@@ -24,7 +24,7 @@
         </MudContainer>
     </MudPaper>
     <MudStack Row="true" Class="mt-2">
-        <MudTextField @ref="multilineReference" @bind-Value="StateData.NewMessageString" Label="Ask Anything!" Lines="1" Style="height: 100%; border: 2px solid #ffc107ff;" id="message-input" Clearable="true" Disabled="StateData.IsAwaitingResponse" OnKeyDown="MessageTextFieldHandleEnterKey" Immediate="true" Variant="Variant.Outlined"></MudTextField>
+        <MudTextFieldExtended T="string" Lines="2" Immediate="true" Variant="Variant.Outlined" AutoSize="true" @ref="multilineReference" @bind-Value="StateData.NewMessageString" Label="Ask Anything!" Style="height: 100%; border: 2px solid #ffc107ff;" id="message-input" Clearable="true" Disabled="StateData.IsAwaitingResponse" OnKeyDown="MessageTextFieldHandleEnterKey" />
         @if (!StateData.IsAwaitingResponse)
         {
             <MudButton Disabled="StateData.IsAwaitingResponse" Color="Color.Secondary" Variant="Variant.Filled" OnClick="SendMessage" Size="Size.Small" Class="mt-1">

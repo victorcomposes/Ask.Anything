@@ -6,6 +6,7 @@ using Ask.Anything.Blazor.WASM.Services;
 using Blazored.LocalStorage;
 using MudBlazor;
 using MudBlazor.Services;
+using MudExtensions.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -29,7 +30,9 @@ builder.Services.AddMudServices(config =>
     config.SnackbarConfiguration.HideTransitionDuration = 500;
     config.SnackbarConfiguration.ShowTransitionDuration = 500;
     config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
-});
+}).AddMudExtensions();
+
+
 const string ApiClient = nameof(ApiClient);
 
 var apiBaseUrl = builder.HostEnvironment.IsDevelopment()
