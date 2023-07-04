@@ -38,6 +38,7 @@ public static class FrontendExtensions
             PromptType.DanGpt => Icons.Material.Filled.Psychology,
             PromptType.AppliedExpertSystem => Icons.Material.Filled.CrueltyFree,
             PromptType.ContinuousProblemSolvingSystem => Icons.Material.Filled.SyncProblem,
+            PromptType.AuthorBasedStoryCreator => Icons.Material.Filled.Book,
             _ => throw new ArgumentException($"Invalid prompt type: {promptType}")
         };
     }
