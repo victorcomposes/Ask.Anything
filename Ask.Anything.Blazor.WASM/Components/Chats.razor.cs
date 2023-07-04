@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using MudBlazor;
+using MudExtensions;
 
 namespace Ask.Anything.Blazor.WASM.Components;
 
@@ -21,7 +22,7 @@ public class ChatsBase : ComponentBase, IDisposable
     [CascadingParameter] protected bool isDarkMode { get; set; }
 
 
-    public MudTextField<string> multilineReference;
+    public MudTextFieldExtended<string> multilineReference;
 
     protected override async Task OnInitializedAsync()
     {
