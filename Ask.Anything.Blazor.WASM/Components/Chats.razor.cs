@@ -42,6 +42,7 @@ public class ChatsBase : ComponentBase, IDisposable
     public async Task CustomPromptSelected(PromptType selectedPrompt)
     {
         StateData.NewMessageString = selectedPrompt.GetSystemMessage();
+        StateData.CurrentPromptType = selectedPrompt;
         await multilineReference.FocusAsync();
     }
 
@@ -49,6 +50,7 @@ public class ChatsBase : ComponentBase, IDisposable
     {
         StateData.CurrentMessageThread.Clear();
         StateData.NewMessageString = "";
+        StateData.CurrentPromptType = PromptType.Assistant;
         await multilineReference.FocusAsync();
     }
 

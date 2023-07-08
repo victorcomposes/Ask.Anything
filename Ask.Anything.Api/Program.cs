@@ -1,5 +1,6 @@
 using Ask.Anything.Api;
 using Ask.Anything.Api.Routes;
+using Ask.Anything.Api.Services;
 using Ask.Anything.Api.SignalR;
 using OpenAI.Extensions;
 
@@ -12,6 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenAIService();
 builder.Services.AddWebApi(CorsPolicy);
+
+
+builder.Services.AddSingleton<IAskAnythingService, AskAnythingService>();
 
 var app = builder.Build();
 
