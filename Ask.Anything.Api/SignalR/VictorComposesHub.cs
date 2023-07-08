@@ -61,7 +61,7 @@ public class VictorComposesHub : Hub<IVictorComposesClient>
                 Temperature = chatRequest.PromptType.GetTemperature(),
                 PresencePenalty = chatRequest.PromptType.GetPresencePenalty(),
                 FrequencyPenalty = chatRequest.PromptType.GetFrequencyPenalty()
-            }, OpenAI.ObjectModels.Models.ChatGpt3_5Turbo, cancellationToken);
+            }, OpenAI.ObjectModels.Models.Gpt_4, cancellationToken);
     }
 
     private static ChatMessage CreateChatMessage(Message message)
