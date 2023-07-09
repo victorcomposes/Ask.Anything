@@ -1,4 +1,5 @@
-﻿using Ask.Anything.Blazor.Shared.Extensions;
+﻿using Ask.Anything.Api.Services;
+using Ask.Anything.Blazor.Shared.Extensions;
 using Ask.Anything.Blazor.Shared.Models;
 using Ask.Anything.Blazor.Shared.Models.Enums;
 using Microsoft.AspNetCore.SignalR;
@@ -12,11 +13,16 @@ public class VictorComposesHub : Hub<IVictorComposesClient>
 {
     private readonly ILogger<VictorComposesHub> _logger;
     private readonly IOpenAIService _openAiService;
+    private readonly IAskAnythingService _askAnythingService;
 
-    public VictorComposesHub(ILogger<VictorComposesHub> logger, IOpenAIService openAiService)
+    public VictorComposesHub(
+        ILogger<VictorComposesHub> logger,
+        IOpenAIService openAiService,
+        IAskAnythingService askAnythingService)
     {
         _logger = logger;
         _openAiService = openAiService;
+        _askAnythingService = askAnythingService;
     }
 
     public override Task OnConnectedAsync()
@@ -53,15 +59,7 @@ public class VictorComposesHub : Hub<IVictorComposesClient>
         ChatRequest chatRequest,
         CancellationToken cancellationToken)
     {
-        return _openAiService.ChatCompletion
-            .CreateCompletionAsStream(new ChatCompletionCreateRequest()
-            {
-                Messages = chatRequest.Messages.Select(CreateChatMessage).ToList(),
-                MaxTokens = chatRequest.PromptType.GetMaxTokens(),
-                Temperature = chatRequest.PromptType.GetTemperature(),
-                PresencePenalty = chatRequest.PromptType.GetPresencePenalty(),
-                FrequencyPenalty = chatRequest.PromptType.GetFrequencyPenalty()
-            }, OpenAI.ObjectModels.Models.Gpt_4, cancellationToken);
+        return _askAnythingService.CreateChatCompletionAsync(chatRequest, cancellationToken);
     }
 
     private static ChatMessage CreateChatMessage(Message message)

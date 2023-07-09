@@ -42,6 +42,7 @@ public class ChatsBase : ComponentBase, IDisposable
     public async Task CustomPromptSelected(PromptType selectedPrompt)
     {
         StateData.NewMessageString = selectedPrompt.GetSystemMessage();
+        StateData.CurrentPromptType = selectedPrompt;
         await multilineReference.FocusAsync();
     }
 
@@ -49,6 +50,7 @@ public class ChatsBase : ComponentBase, IDisposable
     {
         StateData.CurrentMessageThread.Clear();
         StateData.NewMessageString = "";
+        StateData.CurrentPromptType = PromptType.Assistant;
         await multilineReference.FocusAsync();
     }
 
@@ -67,7 +69,25 @@ public class ChatsBase : ComponentBase, IDisposable
         StateData.CurrentMessageThread.Add(newAssistantMessage);
         StateData.NewMessageString = string.Empty;
 
-        await SendMessage(newChatMessage, newAssistantMessage);
+        try
+        {
+            await SendMessage(newChatMessage, newAssistantMessage);
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+            StateData.IsAwaitingResponseStream = false;
+            StateData.IsAwaitingResponse = false;
+            StateData.CancellationTokenSource.Dispose();
+            StateData.CancellationTokenSource = new CancellationTokenSource();
+            if (StateData.CurrentMessageThread.Any() && StateData.CurrentMessageThread.Last().Sender == Sender.AI)
+            {
+                var removeAIMessage = StateData.CurrentMessageThread.Last();
+                StateData.CurrentMessageThread.Remove(removeAIMessage);
+                var removeUserMessage = StateData.CurrentMessageThread.Last();
+                StateData.CurrentMessageThread.Remove(removeUserMessage);
+            }
+        }
     }
 
     private async Task SendMessage(Message chatMessage, Message assistantMessage)

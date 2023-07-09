@@ -39,7 +39,8 @@ public static class FrontendExtensions
             PromptType.AppliedExpertSystem => Icons.Material.Filled.CrueltyFree,
             PromptType.ContinuousProblemSolvingSystem => Icons.Material.Filled.SyncProblem,
             PromptType.AuthorBasedStoryCreator => Icons.Material.Filled.Book,
-            PromptType.PromptCreator => Icons.Material.Filled.Pets,
+            PromptType.PromptCreator => Icons.Material.Filled.OpenInNew,
+            PromptType.DomainExpert => Icons.Material.Filled.DocumentScanner,
             _ => throw new ArgumentException($"Invalid prompt type: {promptType}")
         };
     }
