@@ -4,6 +4,7 @@ using Ask.Anything.Blazor.Shared.Models;
 using OpenAI.Interfaces;
 using OpenAI.ObjectModels.RequestModels;
 using OpenAI.ObjectModels.ResponseModels;
+using OpenAI.Tokenizer.GPT3;
 
 namespace Ask.Anything.Api.Services;
 
@@ -20,11 +21,13 @@ public class AskAnythingService : IAskAnythingService
         ChatRequest chatRequest,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
+        string chatText = chatRequest.Messages.Aggregate("", (current, message) => current + message.Text);
+        var maxTokens = TokenizerGpt3.TokenCount(text: chatText);
         var result = _openAiService.ChatCompletion
             .CreateCompletionAsStream(new ChatCompletionCreateRequest()
             {
                 Messages = chatRequest.Messages.Select(CreateChatMessage).ToList(),
-                MaxTokens = chatRequest.PromptType.GetMaxTokens(),
+                MaxTokens = maxTokens,
                 Temperature = chatRequest.PromptType.GetTemperature(),
                 PresencePenalty = chatRequest.PromptType.GetPresencePenalty(),
                 FrequencyPenalty = chatRequest.PromptType.GetFrequencyPenalty()
@@ -41,6 +44,10 @@ public class AskAnythingService : IAskAnythingService
                 if (completion.Error == null)
                 {
                     throw new Exception("Unknown Error");
+                }
+                else
+                {
+                    throw new Exception(completion.Error.Message);
                 }
             }
         }

@@ -237,7 +237,7 @@ public enum PromptType
     [MyPrompt(
         title: "Assistant",
         temperature: 0.07f,
-        maxTokens: 8192,
+        maxTokens: 2048,
         frequencyPenalty: 0,
         presencePenalty: 0.07f,
         id: "assistant",
@@ -317,7 +317,7 @@ public enum PromptType
     [MyPrompt(
         title: "Domain Expert",
         temperature: 0.06f,
-        maxTokens: 8192,
+        maxTokens: 2048,
         frequencyPenalty: 0,
         presencePenalty: 0.06f,
         id: "domain-design",
